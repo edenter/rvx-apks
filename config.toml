@@ -9,14 +9,17 @@ parallel-jobs = 1
 [YouTube]
 build-mode = "apk"
 version = "auto"
+arch = "arm64-v8a"
 apkmirror-dlurl = "https://www.apkmirror.com/apk/google-inc/youtube"
 
 [GooglePhotos]
 build-mode = "apk"
 version = "auto"
+arch = "arm64-v8a"
 apkmirror-dlurl = "https://www.apkmirror.com/apk/google-inc/photos/"
 
 [Reddit]
 build-mode = "apk"
 version = "auto"
+arch = "arm64-v8a"
 uptodown-dlurl = "https://reddit-official-app.en.uptodown.com/android"
