@@ -207,7 +207,7 @@ _req() {
 		mv -f "$dlp" "$op"
 	fi
 }
-req() { _req "$1" "$2" -H "User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:108.0) Gecko/20100101 Firefox/108.0"; }
+req() { _req "$1" "$2" -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"; }
 gh_req() { _req "$1" "$2" -H "$GH_HEADER"; }
 gh_dl() {
 	if [ ! -f "$1" ]; then
