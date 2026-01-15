@@ -19,16 +19,20 @@ jobs:
 
       - name: Sync and Push Directly
         run: |
-          git config user.name "github-actions[bot]"
+          git config user.name "github-actions[]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
-          # Add the source template
-          git remote add template https://github.com/j-hc/revanced-magisk-module.git
+          git remote add template github.com
           git fetch template
           
-          # Merge changes directly into your current branch
-          # --allow-unrelated-histories helps if the repos were created separately
-          git merge template/main --allow-unrelated-histories -m "chore: sync with template [skip ci]"
+          # 1. Start merge without committing, favoring template changes for most files
+          git merge template/main --allow-unrelated-histories -X theirs --no-commit
           
-          # Push directly to your main branch
+          # 2. Revert the specific file you want to ignore (keep your version)
+          # Replace 'path/to/your/file' with the actual file path
+          git checkout HEAD -- config.toml
+          
+          # 3. Finalize the merge commit
+          git commit -m "chore: sync with template (kept local config) [skip ci]"
+          
           git push origin HEAD:main
