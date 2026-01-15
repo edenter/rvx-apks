@@ -9,13 +9,26 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      pull-requests: write
     steps:
-      - name: Checkout Repository
+      - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Actions Template Sync
-        uses: AndreasAugustin/actions-template-sync@v2
         with:
-          source_repo_path: j-hc/revanced-magisk-module # Your template source
-          is_force_push_pr: true
+          fetch-depth: 0
+          # Note: If your branch is "Protected", you must use a PAT instead of GITHUB_TOKEN
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Sync and Push Directly
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Add the source template
+          git remote add template github.com/j-hc/revanced-magisk-module
+          git fetch template
+          
+          # Merge changes directly into your current branch
+          # --allow-unrelated-histories helps if the repos were created separately
+          git merge template/main --allow-unrelated-histories -m "chore: sync with template [skip ci]"
+          
+          # Push directly to your main branch
+          git push origin HEAD:main
