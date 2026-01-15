@@ -23,7 +23,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
           # Add the source template
-          git remote add template github.com/j-hc/revanced-magisk-module
+          git remote add template github.com
           git fetch template
           
           # Merge changes directly into your current branch
