@@ -32,7 +32,11 @@ jobs:
           # Replace 'path/to/your/file' with the actual file path
           git checkout HEAD -- config.toml
           
-          # 3. Finalize the merge commit
-          git commit -m "chore: sync with template (kept local config) [skip ci]"
-          
-          git push origin HEAD:main
+          # 3. Check if there are changes before committing
+          if [ -n "$(git status --porcelain)" ]; then
+             git commit -m "chore: sync with template (kept local config) [skip ci]"
+             git push origin HEAD:main
+             echo "Changes pushed successfully."
+          else
+             echo "No changes to sync. Workflow finished."
+          fi
